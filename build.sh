@@ -67,4 +67,6 @@ if [ "$ARCH" == "Linux" ]; then
         exit -1
     fi
 
+    TIME_END=$(( $(date -u +%s) - ${TIME_BEGIN} ))
+
 fi
