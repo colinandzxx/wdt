@@ -7,7 +7,7 @@ SET(SRC_FILENAMES algorithm.cpp any.cpp bind.cpp condition_variable.cpp exceptio
 
 SET(SRC_FILES "")
 FOREACH(FN ${SRC_FILENAMES})
-   LIST(APPEND SRC_FILES "upstream/src/${FN}")
+  LIST(APPEND SRC_FILES "upstream/src/${FN}")
 ENDFOREACH(FN)
 
 add_wast_library(TARGET libc++

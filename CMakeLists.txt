@@ -3,9 +3,8 @@ project( wdt )
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
-include(wasm)
+add_subdirectory( externals )
 
-add_subdirectory(lib)
+include( wasm )
 
-
-
+add_subdirectory( lib )
