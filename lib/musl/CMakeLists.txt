@@ -19,9 +19,9 @@ add_wast_library(TARGET libc
   NOWARNINGS
   SOURCE_FILES ${CRYPT_SOURCES} ${CTYPE_SOURCES} ${ENV_SOURCES} ${ERRNO_SOURCES} ${EXIT_SOURCES} ${INTERNAL_SOURCES} ${LOCALE_SOURCES} ${MATH_SOURCES}
   ${MBYTE_SOURCES} ${MISC_SOURCES} ${SEARCH_SOURCES} ${STDIO_SOURCES} ${STDLIB_SOURCES} ${STRING_SOURCES} ${TIME_SOURCES} ${THREAD_SOURCES}
-  INCLUDE_FOLDERS ${CMAKE_SOURCE_DIR}/contracts/musl/upstream/include
-    ${CMAKE_SOURCE_DIR}/contracts/musl/upstream/src/internal
-    ${CMAKE_SOURCE_DIR}/contracts/musl/upstream/arch/eos
-    ${CMAKE_SOURCE_DIR}/contracts/
+  INCLUDE_FOLDERS ${CMAKE_SOURCE_DIR}/lib/musl/upstream/include
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/src/internal
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/arch/eos
+    ${CMAKE_SOURCE_DIR}/lib/
   DESTINATION_FOLDER ${CMAKE_CURRENT_BINARY_DIR}
 )
