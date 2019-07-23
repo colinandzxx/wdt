@@ -8,5 +8,5 @@
 	branch = asm2wasm-import-wasm-mem
 [submodule "lib/musl/upstream"]
 	path = lib/musl/upstream
-	url = https://github.com/colinandzxx/musl.git
-	branch = v1.1.23
+	url = https://github.com/jfbastien/musl.git
+	branch = wasm-prototype-1
