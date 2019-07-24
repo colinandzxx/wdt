@@ -1,11 +1,13 @@
+VERSION=0.0.1
+
 ARCH=$( uname )
 BUILD_DIR="${PWD}/build"
 CMAKE_BUILD_TYPE=Release
 ENABLE_COVERAGE_TESTING=false
 DOXYGEN=false
-TIME_BEGIN=$( date -u +%s )
 TEMP_DIR="/tmp"
-VERSION=0.0.1
+
+TIME_BEGIN=$( date -u +%s )
 
 if [ "$ARCH" == "Linux" ]; then
 
