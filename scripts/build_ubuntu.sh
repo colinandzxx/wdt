@@ -1,6 +1,6 @@
 CPU_CORE=$( lscpu | grep "^CPU(s)" | tr -s ' ' | cut -d\  -f2 || cut -d' ' -f2 )
 JOBS=$(( CPU_CORE ))
-VER=release_40
+VER=release_90
 
 printf "\\n\\tChecking for LLVM with WASM support.\\n"
 if [ ! -d "${WASM_ROOT}/bin" ]; then
