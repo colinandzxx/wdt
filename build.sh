@@ -1,6 +1,7 @@
 ARCH=$( uname )
 BUILD_DIR="${PWD}/build"
 CMAKE_BUILD_TYPE=Release
+ENABLE_COVERAGE_TESTING=false
 DOXYGEN=false
 TIME_BEGIN=$( date -u +%s )
 TEMP_DIR="/tmp"
@@ -35,6 +36,7 @@ if [ "$ARCH" == "Linux" ]; then
 
     printf "\\n\\n>>>>>>>> ALL dependencies sucessfully.\\n\\n"
     printf ">>>>>>>> CMAKE_BUILD_TYPE=%s\\n" "${CMAKE_BUILD_TYPE}"
+    printf ">>>>>>>> ENABLE_COVERAGE_TESTING=%s\\n" "${ENABLE_COVERAGE_TESTING}"
 
     if [ ! -d "${BUILD_DIR}" ]; then
         if ! mkdir -p "${BUILD_DIR}"
@@ -55,7 +57,8 @@ if [ "$ARCH" == "Linux" ]; then
     fi
 
     if ! "${CMAKE}" -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}" -DCMAKE_CXX_COMPILER="${WASM_ROOT}/bin/${CXX_COMPILER}" \
-        -DCMAKE_C_COMPILER="${WASM_ROOT}/bin/${C_COMPILER}" -DWASM_ROOT="${WASM_ROOT}" -DBUILD_DOXYGEN="${DOXYGEN}" ..
+        -DCMAKE_C_COMPILER="${WASM_ROOT}/bin/${C_COMPILER}" -DWASM_ROOT="${WASM_ROOT}" \
+        -DENABLE_COVERAGE_TESTING="${ENABLE_COVERAGE_TESTING}" -DBUILD_DOXYGEN="${DOXYGEN}" ..
     then
         printf "\\n\\t>>>>>>>>>>>>>>>>>>>> CMAKE building wdt has exited with the above error.\\n\\n"
         exit -1
