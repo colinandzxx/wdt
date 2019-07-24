@@ -54,8 +54,8 @@ if [ "$ARCH" == "Linux" ]; then
         CMAKE=$( command -v cmake )
     fi
 
-    if ! "${CMAKE}" -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}" -DCMAKE_CXX_COMPILER="${CXX_COMPILER}" \
-        -DCMAKE_C_COMPILER="${C_COMPILER}" -DWASM_ROOT="${WASM_ROOT}" -DBUILD_DOXYGEN="${DOXYGEN}" ..
+    if ! "${CMAKE}" -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}" -DCMAKE_CXX_COMPILER="${WASM_ROOT}/${CXX_COMPILER}" \
+        -DCMAKE_C_COMPILER="${WASM_ROOT}/${C_COMPILER}" -DWASM_ROOT="${WASM_ROOT}" -DBUILD_DOXYGEN="${DOXYGEN}" ..
     then
         printf "\\n\\t>>>>>>>>>>>>>>>>>>>> CMAKE building wdt has exited with the above error.\\n\\n"
         exit -1
