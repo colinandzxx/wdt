@@ -19,8 +19,8 @@ if [ "$ARCH" == "Linux" ]; then
     case "$OS_NAME" in
         "Ubuntu")
             FILE="${PWD}/scripts/build_ubuntu.sh"
-            CXX_COMPILER=clang++-4.0
-            C_COMPILER=clang-4.0
+            CXX_COMPILER=clang++
+            C_COMPILER=clang
             MONGOD_CONF=${HOME}/opt/mongodb/mongod.conf
             export PATH=${HOME}/opt/mongodb/bin:$PATH
         ;;
