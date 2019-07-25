@@ -3,7 +3,7 @@
 set(DEFAULT_SYSTEM_INCLUDE_FOLDERS ${CMAKE_SOURCE_DIR}/lib/libc++/upstream/include 
 ${CMAKE_SOURCE_DIR}/lib/musl/upstream/include 
 ${CMAKE_SOURCE_DIR}/lib/musl/upstream/arch/wasm32
-${CMAKE_SOURCE_DIR}/obj/include)
+${CMAKE_SOURCE_DIR}/lib/musl/upstream/obj/include)
 
 set(STANDARD_INCLUDE_FOLDERS ${CMAKE_SOURCE_DIR}/lib)
 
