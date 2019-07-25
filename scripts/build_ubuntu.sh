@@ -84,3 +84,41 @@ printf "\\tInstalling LLVM with WASM\\n"
 else
     printf "\\tWASM found at %s/bin.\\n" "${WASM_ROOT}"
 fi
+
+printf "\\n\\tPrepare for MUSL lib with WASM support.\\n"
+if [ -d "${PWD}/lib/musl/upstream" ]; then
+    if ! cd "${PWD}/lib/musl/upstream"
+    then
+        printf "\\n\\tUnable to cd into directory %s.\\n" "${PWD}/lib/musl/upstream"
+        printf "\\n\\tExiting now.\\n"
+        exit 1;
+    fi
+    if ! .${PWD}/lib/musl/upstream/configure CC="${WASM_ROOT}/bin/clang --target=wasm32" --target=wasm
+    then
+        printf "\\n\\tUnable to configure %s.\\n" "${PWD}/lib/musl/upstream/configure"
+        printf "\\n\\tExiting now.\\n"
+        exit 1;
+    fi
+    if ! make obj/include/bits/alltypes.h
+    then
+        printf "\\n\\tmake error: %s.\\n" "make obj/include/bits/alltypes.h"
+        printf "\\n\\tExiting now.\\n"
+        exit 1;
+    fi
+    if ! make obj/include/bits/syscall.h
+    then
+        printf "\\n\\tmake error: %s.\\n" "make obj/include/bits/syscall.h"
+        printf "\\n\\tExiting now.\\n"
+        exit 1;
+    fi
+    if ! make obj/src/internal/version.h
+    then
+        printf "\\n\\tmake error: %s.\\n" "make obj/src/internal/version.h"
+        printf "\\n\\tExiting now.\\n"
+        exit 1;
+    fi
+else
+    printf "\\tMUSL lib not found.\\n"
+    printf "\\n\\tExiting now.\\n"
+    exit 1;
+fi
