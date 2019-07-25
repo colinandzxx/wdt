@@ -61,7 +61,8 @@ printf "\\tInstalling LLVM with WASM\\n"
         exit 1;
     fi
     if ! cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${WASM_ROOT}" -DLLVM_TARGETS_TO_BUILD= \
-    -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly -DCMAKE_BUILD_TYPE=Release ../
+    -DCMAKE_BUILD_TYPE=Release ../
+    # -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly -DCMAKE_BUILD_TYPE=Release ../
     then
         printf "\\tError compiling LLVM and clang with EXPERIMENTAL WASM support.0\\n"
         printf "\\n\\tExiting now.\\n"
