@@ -50,7 +50,7 @@ macro(compile_wast)
     # -fno-exceptions
     #   Disable the generation of extra code needed to propagate exceptions
     if ("${extension}" STREQUAL ".c")
-        set(STDFLAG -D_XOPEN_SOURCE=700)
+        set(STDFLAG -D_XOPEN_SOURCE=700 "--std=c99")
     else()
         set(STDFLAG "--std=c++14")
     endif()
