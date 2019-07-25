@@ -14,5 +14,11 @@ add_wast_library(TARGET libc++
   NOWARNINGS
   SOURCE_FILES "${SRC_FILES}"
   INCLUDE_FOLDERS "${STANDARD_INCLUDE_FOLDERS}"
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/arch/wasm32
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/arch/generic
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/obj/internal
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/src/internal
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/obj/include
+    ${CMAKE_SOURCE_DIR}/lib/musl/upstream/include
   DESTINATION_FOLDER ${CMAKE_CURRENT_BINARY_DIR}
 )
