@@ -77,9 +77,9 @@ macro(compile_wast)
        list(APPEND WASM_COMMAND -isystem ${folder})
     endforeach()
 
-    # foreach(folder ${ARG_SYSTEM_INCLUDE_FOLDERS})
-    #    list(APPEND WASM_COMMAND -isystem ${folder})
-    # endforeach()
+    foreach(folder ${ARG_SYSTEM_INCLUDE_FOLDERS})
+       list(APPEND WASM_COMMAND -isystem ${folder})
+    endforeach()
 
     add_custom_command(OUTPUT ${outfile}.bc
         DEPENDS ${infile}
