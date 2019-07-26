@@ -74,4 +74,6 @@ if [ "$ARCH" == "Linux" ]; then
 
     TIME_END=$(( $(date -u +%s) - ${TIME_BEGIN} ))
 
+    echo "WDT has been successfully built. $(($TIME_END/3600)):$(($TIME_END%3600/60)):$(($TIME_END%60))"
+
 fi
