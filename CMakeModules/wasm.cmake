@@ -172,48 +172,48 @@ macro(add_wast_executable)
     )
     set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${target}.wasm)
 
-    STRING (REPLACE "." "_" TARGET_VARIABLE "${target}")
+    # STRING (REPLACE "." "_" TARGET_VARIABLE "${target}")
 
-    add_custom_command(OUTPUT ${DESTINATION_FOLDER}/${target}.wast.hpp
-        DEPENDS ${DESTINATION_FOLDER}/${target}.wast
-        COMMAND echo "const char* const ${TARGET_VARIABLE}_wast = R\"=====("  > ${DESTINATION_FOLDER}/${target}.wast.hpp
-        COMMAND cat ${DESTINATION_FOLDER}/${target}.wast >> ${DESTINATION_FOLDER}/${target}.wast.hpp
-        COMMAND echo ")=====\";"  >> ${DESTINATION_FOLDER}/${target}.wast.hpp
-        COMMENT "Generating ${target}.wast.hpp"
-        VERBATIM
-    )
+    # add_custom_command(OUTPUT ${DESTINATION_FOLDER}/${target}.wast.hpp
+    #     DEPENDS ${DESTINATION_FOLDER}/${target}.wast
+    #     COMMAND echo "const char* const ${TARGET_VARIABLE}_wast = R\"=====("  > ${DESTINATION_FOLDER}/${target}.wast.hpp
+    #     COMMAND cat ${DESTINATION_FOLDER}/${target}.wast >> ${DESTINATION_FOLDER}/${target}.wast.hpp
+    #     COMMAND echo ")=====\";"  >> ${DESTINATION_FOLDER}/${target}.wast.hpp
+    #     COMMENT "Generating ${target}.wast.hpp"
+    #     VERBATIM
+    # )
   
-    if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${target}.abi )
-        add_custom_command(OUTPUT ${DESTINATION_FOLDER}/${target}.abi.hpp
-            DEPENDS ${DESTINATION_FOLDER}/${target}.abi
-            COMMAND echo "const char* const ${TARGET_VARIABLE}_abi = R\"=====("  > ${DESTINATION_FOLDER}/${target}.abi.hpp
-            COMMAND cat ${DESTINATION_FOLDER}/${target}.abi >> ${DESTINATION_FOLDER}/${target}.abi.hpp
-            COMMAND echo ")=====\";"  >> ${DESTINATION_FOLDER}/${target}.abi.hpp
-            COMMENT "Generating ${target}.abi.hpp"
-            VERBATIM
-        )
-        set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${target}.abi.hpp)
-        set(extra_target_dependency   ${DESTINATION_FOLDER}/${target}.abi.hpp)
-    else()
-    endif()
+    # if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${target}.abi )
+    #     add_custom_command(OUTPUT ${DESTINATION_FOLDER}/${target}.abi.hpp
+    #         DEPENDS ${DESTINATION_FOLDER}/${target}.abi
+    #         COMMAND echo "const char* const ${TARGET_VARIABLE}_abi = R\"=====("  > ${DESTINATION_FOLDER}/${target}.abi.hpp
+    #         COMMAND cat ${DESTINATION_FOLDER}/${target}.abi >> ${DESTINATION_FOLDER}/${target}.abi.hpp
+    #         COMMAND echo ")=====\";"  >> ${DESTINATION_FOLDER}/${target}.abi.hpp
+    #         COMMENT "Generating ${target}.abi.hpp"
+    #         VERBATIM
+    #     )
+    #     set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${target}.abi.hpp)
+    #     set(extra_target_dependency   ${DESTINATION_FOLDER}/${target}.abi.hpp)
+    # else()
+    # endif()
   
-    add_custom_target(${target} ALL DEPENDS ${DESTINATION_FOLDER}/${target}.wast.hpp ${extra_target_dependency} ${DESTINATION_FOLDER}/${target}.wasm)
+    # add_custom_target(${target} ALL DEPENDS ${DESTINATION_FOLDER}/${target}.wast.hpp ${extra_target_dependency} ${DESTINATION_FOLDER}/${target}.wasm)
     
-    set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${DESTINATION_FOLDER}/${target}.wast.hpp)
+    # set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${DESTINATION_FOLDER}/${target}.wast.hpp)
 
-    set_property(TARGET ${target} PROPERTY INCLUDE_DIRECTORIES ${ARG_INCLUDE_FOLDERS})
+    # set_property(TARGET ${target} PROPERTY INCLUDE_DIRECTORIES ${ARG_INCLUDE_FOLDERS})
 
-    set(extra_target_dependency)
+    # set(extra_target_dependency)
 
-    # For CLion code insight
-    include_directories(..)
-    if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${target}.hpp)
-        set(HEADER_FILE ${CMAKE_CURRENT_SOURCE_DIR}/${target}.hpp)
-    endif()
-    file(GLOB HEADER_FILES ${ARG_INCLUDE_FOLDERS}/*.hpp ${SYSTEM_INCLUDE_FOLDERS}/*.hpp)
-    add_executable(${target}.tmp EXCLUDE_FROM_ALL ${SOURCE_FILES} ${HEADER_FILE} ${HEADER_FILES})
+    # # For CLion code insight
+    # include_directories(..)
+    # if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${target}.hpp)
+    #     set(HEADER_FILE ${CMAKE_CURRENT_SOURCE_DIR}/${target}.hpp)
+    # endif()
+    # file(GLOB HEADER_FILES ${ARG_INCLUDE_FOLDERS}/*.hpp ${SYSTEM_INCLUDE_FOLDERS}/*.hpp)
+    # add_executable(${target}.tmp EXCLUDE_FROM_ALL ${SOURCE_FILES} ${HEADER_FILE} ${HEADER_FILES})
 
-    add_test(NAME "validate_${target}_abi"
-        COMMAND ${CMAKE_BINARY_DIR}/scripts/abi_is_json.py ${ABI_FILES})
+    # add_test(NAME "validate_${target}_abi"
+    #     COMMAND ${CMAKE_BINARY_DIR}/scripts/abi_is_json.py ${ABI_FILES})
 
 endmacro(add_wast_executable)
