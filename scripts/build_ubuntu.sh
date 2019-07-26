@@ -1,6 +1,7 @@
 CPU_CORE=$( lscpu | grep "^CPU(s)" | tr -s ' ' | cut -d\  -f2 || cut -d' ' -f2 )
 JOBS=$(( CPU_CORE ))
 VER=release_90
+ROOT_PATH=${PWD}
 
 printf "\\n\\tChecking for LLVM with WASM support.\\n"
 if [ ! -d "${WASM_ROOT}/bin" ]; then
@@ -61,8 +62,8 @@ printf "\\tInstalling LLVM with WASM\\n"
         exit 1;
     fi
     if ! cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${WASM_ROOT}" -DLLVM_TARGETS_TO_BUILD= \
-    -DCMAKE_BUILD_TYPE=Release ../
-    # -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly -DCMAKE_BUILD_TYPE=Release ../
+    -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=WebAssembly -DCMAKE_BUILD_TYPE=Release ../
+    # -DCMAKE_BUILD_TYPE=Release ../
     then
         printf "\\tError compiling LLVM and clang with EXPERIMENTAL WASM support.0\\n"
         printf "\\n\\tExiting now.\\n"
@@ -85,17 +86,18 @@ else
     printf "\\tWASM found at %s/bin.\\n" "${WASM_ROOT}"
 fi
 
+MUSL_PATH=${ROOT_PATH}/lib/musl/upstream
 printf "\\n\\tPrepare for MUSL lib with WASM support.\\n"
-if [ -d "${PWD}/lib/musl/upstream" ]; then
-    if ! cd "${PWD}/lib/musl/upstream"
+if [ -d "${MUSL_PATH}" ]; then
+    if ! cd "${MUSL_PATH}"
     then
-        printf "\\n\\tUnable to cd into directory %s.\\n" "${PWD}/lib/musl/upstream"
+        printf "\\n\\tUnable to cd into directory %s.\\n" "${MUSL_PATH}"
         printf "\\n\\tExiting now.\\n"
         exit 1;
     fi
-    if ! .${PWD}/lib/musl/upstream/configure CC="${WASM_ROOT}/bin/clang --target=wasm32" --target=wasm
+    if ! ./configure CC="${WASM_ROOT}/bin/clang --target=wasm32" --target=wasm
     then
-        printf "\\n\\tUnable to configure %s.\\n" "${PWD}/lib/musl/upstream/configure"
+        printf "\\n\\tUnable to configure %s.\\n" "./configure"
         printf "\\n\\tExiting now.\\n"
         exit 1;
     fi
@@ -118,7 +120,7 @@ if [ -d "${PWD}/lib/musl/upstream" ]; then
         exit 1;
     fi
 else
-    printf "\\tMUSL lib not found.\\n"
+    printf "\\tMUSL lib not found. %s\\n" "${MUSL_PATH}"
     printf "\\n\\tExiting now.\\n"
     exit 1;
 fi
