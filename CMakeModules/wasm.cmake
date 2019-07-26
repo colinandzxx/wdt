@@ -11,7 +11,7 @@ endif()
 
 macro(compile_wast)
     #read arguments include ones that we don't since arguments get forwared "as is" and we don't want to threat unknown argument names as values
-    cmake_parse_arguments(ARG "NOWARNINGS" "TARGET;DESTINATION_FOLDER" "SOURCE_FILES;INCLUDE_FOLDERS;SYSTEM_INCLUDE_FOLDERS;LIBRARIES" ${ARGN})
+    cmake_parse_arguments(ARG "NOWARNINGS" "TARGET;DESTINATION_FOLDER" "SOURCE_FILES;INCLUDE_FOLDERS;SYSTEM_INCLUDE_FOLDERS;LIBRARIES;EXTERN_FLAGS" ${ARGN})
     set(target ${ARG_TARGET})
 
     # NOTE: Setting SOURCE_FILE and looping over it to avoid cmake issue with compilation ${target}.bc's rule colliding with
@@ -57,6 +57,7 @@ macro(compile_wast)
 
     set(WASM_COMMAND ${WASM_CLANG} -emit-llvm -O3 ${STDFLAG} --target=wasm32 -ffreestanding
         -nostdlib -nostdlibinc -DBOOST_DISABLE_ASSERTS -DBOOST_EXCEPTION_DISABLE -fno-threadsafe-statics -fno-rtti -fno-exceptions
+        ${ARG_EXTERN_FLAGS}
         -c ${infile} -o ${outfile}.bc
     )
     if (${ARG_NOWARNINGS})
