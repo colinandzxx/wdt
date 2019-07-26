@@ -6,7 +6,7 @@ set(DEFAULT_SYSTEM_INCLUDE_FOLDERS
     ${CMAKE_SOURCE_DIR}/lib/musl/upstream/arch/wasm32
     ${CMAKE_SOURCE_DIR}/lib/musl/upstream/arch/generic)
 
-# set(STANDARD_INCLUDE_FOLDERS ${CMAKE_SOURCE_DIR}/lib)
+set(STANDARD_INCLUDE_FOLDERS ${CMAKE_SOURCE_DIR}/lib)
 
 add_subdirectory(hello)
 
