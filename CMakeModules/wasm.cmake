@@ -206,6 +206,7 @@ macro(add_wast_executable)
     # endif()
   
     # add_custom_target(${target} ALL DEPENDS ${DESTINATION_FOLDER}/${target}.wast.hpp ${extra_target_dependency} ${DESTINATION_FOLDER}/${target}.wasm)
+    add_custom_target(${target} ALL DEPENDS ${extra_target_dependency} ${DESTINATION_FOLDER}/${target}.wasm)
     
     # set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${DESTINATION_FOLDER}/${target}.wast.hpp)
 
