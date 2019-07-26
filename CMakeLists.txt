@@ -102,4 +102,4 @@ include( wasm )
 
 add_subdirectory( lib )
 
-add_subdirectory( dev )
+# add_subdirectory( dev )
