@@ -62,11 +62,11 @@ else( WIN32 ) # Apple AND Linux
 
     if( APPLE )
         # Apple Specific Options Here
-        message( STATUS "Configuring EOSIO on OS X" )
+        message( STATUS "Configuring WDT on OS X" )
         set( CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-deprecated-declarations" )
     else( APPLE )
         # Linux Specific Options Here
-        message( STATUS "Configuring EOSIO on Linux" )
+        message( STATUS "Configuring WDT on Linux" )
         set( CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wall" )
         if ( FULL_STATIC_BUILD )
             set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -static-libgcc")
