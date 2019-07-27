@@ -131,14 +131,6 @@ macro(add_wast_executable)
     foreach(lib ${ARG_LIBRARIES})
         list(APPEND LIBRARIES ${${lib}_BC_FILENAME})
     endforeach()
-
-    message(STATUS "===============A => " ${WASM_LLVM_LINK})
-    message(STATUS "===============B => " ${target})
-    message(STATUS "===============C => " ${LIBRARIES})
-    message(STATUS "===============D => " ${ARG_LIBRARIES})
-    message(STATUS "===============E => " ${outfiles})
-    message(STATUS "===============F => " ${DESTINATION_FOLDER})
-    
     add_custom_command(OUTPUT ${target}.bc
         DEPENDS ${outfiles} ${ARG_LIBRARIES} ${LIBRARIES}
         COMMAND ${WASM_LLVM_LINK} -only-needed -o ${target}.bc ${outfiles} ${LIBRARIES}
