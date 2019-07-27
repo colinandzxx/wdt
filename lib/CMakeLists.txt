@@ -7,6 +7,4 @@ set(DEFAULT_SYSTEM_INCLUDE_FOLDERS ${CMAKE_SOURCE_DIR}/lib/libc++/upstream/inclu
 add_subdirectory(musl)
 add_subdirectory(libc++)
 
-add_subdirectory(hello)
-
 # install(DIRECTORY libc++ DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR})
