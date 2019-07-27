@@ -1,7 +1,7 @@
 [submodule "lib/libc++/upstream"]
 	path = lib/libc++/upstream
 	url = https://github.com/llvm-mirror/libcxx.git
-	branch = release_90
+	branch = release_40
 [submodule "externals/binaryen"]
 	path = externals/binaryen
 	url = https://github.com/colinandzxx/binaryen.git
