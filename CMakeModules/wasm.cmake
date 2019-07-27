@@ -165,7 +165,7 @@ macro(add_wast_executable)
 
     add_custom_command(OUTPUT ${DESTINATION_FOLDER}/${target}.wasm
         DEPENDS ${target}.wast
-        COMMAND $<TARGET_FILE:wasm-as> ${DESTINATION_FOLDER}/${target}.wast ${DESTINATION_FOLDER}/${target}.wasm -n
+        COMMAND $<TARGET_FILE:wasm-as> ${DESTINATION_FOLDER}/${target}.wast -o ${DESTINATION_FOLDER}/${target}.wasm
         COMMENT "Generating WASM ${target}.wasm"
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         VERBATIM
