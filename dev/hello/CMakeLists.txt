@@ -9,4 +9,5 @@ add_wast_executable(TARGET hello
     -D_LIBCPP_NO_RTTI 
     -D_LIBCPP_DISABLE_VISIBILITY_ANNOTATIONS 
     -D_LIBCPP_HAS_MUSL_LIBC
+    -D__ELF__
 )
