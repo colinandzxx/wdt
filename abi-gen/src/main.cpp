@@ -166,12 +166,13 @@ int main(int argc, const char **argv)
 			
 			cout << j.dump(4) << endl;
 			*/
-			
+			printf("output abi json format:\n");
+
 			json jj = output;
 			
 			std::cout << jj.dump(4) << std::endl;
 
-			printf("finished\n");
+			printf("abi generation completed\n");
 		}
 	}
 	return result;
