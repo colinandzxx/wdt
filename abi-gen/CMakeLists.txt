@@ -18,7 +18,7 @@ aux_source_directory(src DIR_SRCS)
 add_executable(abi-gen ${DIR_SRCS})
 
 #head file path
-target_include_directories(abi-gen PUBLIC
+target_include_directories(abi-gen PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/include"
   "${LLVM_INCLUDE_DIRS}"
   "${Boost_INCLUDE_DIRS}"
