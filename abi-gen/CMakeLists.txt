@@ -1,8 +1,12 @@
 find_package(LLVM 6.0 REQUIRED CONFIG)
-
 if (NOT LLVM_FOUND)
   message(FATAL_ERROR "LLVM Not Found!")
 endif (NOT LLVM_FOUND)
+
+find_package(Boost 1.67 REQUIRED CONFIG)
+if (NOT Boost_FOUND)
+  message(FATAL_ERROR "Boost Not Found!")
+endif (NOT Boost_FOUND)
 
 #project name
 project(abi-gen)
@@ -10,8 +14,9 @@ project(abi-gen)
 #head file path
 include_directories(
   include
-  ~/opt/boost/include
+  # ~/opt/boost/include
   ${LLVM_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 #source directory
