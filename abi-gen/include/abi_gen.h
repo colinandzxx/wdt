@@ -28,7 +28,7 @@
 #include "clang/Lex/MacroArgs.h"
 #include "clang/Tooling/Tooling.h"
 #include "clang/Tooling/CommonOptionsParser.h"
-#include "clang/Tooling/Core/QualTypeNames.h"
+#include "clang/AST/QualTypeNames.h"
 #include "llvm/Support/raw_ostream.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
