@@ -62,7 +62,7 @@ function generate_abi {
         -extra-arg=-nostdinc -extra-arg=-nostdinc++ -extra-arg=-DABIGEN \
         -extra-arg=-I@CMAKE_SOURCE_DIR@/bc/include -extra-arg=-I$context_folder \
         -extra-arg=-fparse-all-comments -destination-file=${outname} -verbose=0 \
-        -context=$context_folder $1 2>dev/null | while read linke
+        -context=$context_folder $1 2>/dev/null | while read line
     do
         if [ "$line"x == "output abi json format:"x ]; then
             printflag=true
@@ -84,8 +84,7 @@ function generate_abi {
         exit 1
     fi
 
-    cp $workdir/tmp.abi ${outname}
-
+    cat $workdir/tmp.abi | jq . > ${outname}
     echo "Generated ${outname} ..."
 
     ($PRINT_CMDS; rm -rf $workdir)
