@@ -48,6 +48,8 @@ function build_contract {
 }
 
 function generate_abi {
+    set -e
+    workdir=`mktemp -d`
 
     if [[ ! -e "$1" ]]; then
         echo "You must specify a file"
@@ -55,18 +57,39 @@ function generate_abi {
     fi
     
     context_folder=$(cd "$(dirname "$1")" ; pwd -P)
-    
+    printflag=false
     ${ABIGEN} -extra-arg=-c -extra-arg=--std=c++14 -extra-arg=--target=wasm32 \
         -extra-arg=-nostdinc -extra-arg=-nostdinc++ -extra-arg=-DABIGEN \
         -extra-arg=-I@CMAKE_SOURCE_DIR@/bc/include -extra-arg=-I$context_folder \
         -extra-arg=-fparse-all-comments -destination-file=${outname} -verbose=0 \
-        -context=$context_folder $1 --
+        -context=$context_folder $1 2>dev/null | while read linke
+    do
+        if [ "$line"x == "output abi json format:"x ]; then
+            printflag=true
+            continue
+        fi
 
-    if [ "$?" -ne 0 ]; then
+        if [ "$line"x == "abi generation completed"x ]; then
+            printflag=false
+            break
+        fi
+
+        if [ $printflag == true ]; then
+            echo $line >> $workdir/tmp.abi
+        fi
+    done
+
+    if [ ! -f "$workdir/tmp.abi" ]; then
+        echo "Generate failed!"
         exit 1
-    fi    
+    fi
+
+    cp $workdir/tmp.abi ${outname}
 
     echo "Generated ${outname} ..."
+
+    ($PRINT_CMDS; rm -rf $workdir)
+    set +e
 }
 
 function print_help {
