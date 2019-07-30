@@ -1,4 +1,5 @@
 #cmake_minimum_required( VERSION 3.5 )
+find_package(LLVM 6.0 REQUIRED CONFIG)
 
 #SET (CMAKE_C_COMPILER             "/usr/bin/clang-4.0")
 SET (CMAKE_C_FLAGS                "-Wall -std=c99")
