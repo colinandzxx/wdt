@@ -8,6 +8,9 @@ if (NOT Boost_FOUND)
   message(FATAL_ERROR "Boost Not Found!")
 endif (NOT Boost_FOUND)
 
+# SET(CMAKE_BUILD_TYPE "Debug")
+# SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")
+
 #project name
 # project(abi-gen)
 
