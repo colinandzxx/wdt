@@ -1,8 +1,12 @@
 #cmake_minimum_required( VERSION 3.5 )
 find_package(LLVM 6.0 REQUIRED CONFIG)
 
+if (NOT LLVM_FOUND)
+  message(FATAL_ERROR "LLVM Not Found!")
+endif (NOT LLVM_FOUND)
+
 #SET (CMAKE_C_COMPILER             "/usr/bin/clang-4.0")
-SET (CMAKE_C_FLAGS                "-Wall -std=c99")
+set (CMAKE_C_FLAGS                "-Wall -std=c99")
 # SET (CMAKE_C_FLAGS_DEBUG          "-g")
 # SET (CMAKE_C_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
 # SET (CMAKE_C_FLAGS_RELEASE        "-O4 -DNDEBUG")
@@ -12,32 +16,33 @@ SET (CMAKE_C_FLAGS                "-Wall -std=c99")
 
 
 #project name
-PROJECT(abi_gen)
+project(abi_gen)
 
 #head file path
-INCLUDE_DIRECTORIES(
+include_directories(
 include
 ~/opt/boost/include
+${LLVM_INCLUDE_DIRS}
 # ~/opt/wasm/include
 )
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++14" )
 #source directory
-AUX_SOURCE_DIRECTORY(src DIR_SRCS)
+aux_source_directory(src DIR_SRCS)
 
 #set extern libraries
-SET(LIBRARIES
-	libpthread.so
-	libz.so
-	libffi.so
-	libdl.so
-	libm.so
-	librt.so
-	libtinfo.so
+set(LIBRARIES
+  libpthread.so
+  libz.so
+  libffi.so
+  libdl.so
+  libm.so
+  librt.so
+  libtinfo.so
 )
 #add executable file
-ADD_EXECUTABLE(abi_gen ${DIR_SRCS})
+add_executable(abi_gen ${DIR_SRCS})
 #add link library
-TARGET_LINK_LIBRARIES(abi_gen ${LIBRARIES})
+target_link_libraries(abi_gen ${LIBRARIES})
 
 target_link_libraries(abi_gen
   clangRewrite
