@@ -26,6 +26,32 @@ do
     fi
 done
 
+if [ "${COUNT}" -gt 1 ]; then
+    printf "\\n\\tThe following dependencies are required to install WDT.\\n"
+    printf "\\n\\t${DISPLAY}\\n\\n" 
+    printf "\\tDo you wish to install these packages?\\n"
+    select yn in "Yes" "No"; do
+        case $yn in
+            [Yy]* ) 
+                printf "\\n\\n\\tInstalling dependencies\\n\\n"
+                sudo apt-get update
+                if ! sudo apt-get -y install ${DEP}
+                then
+                    printf "\\n\\tDPKG dependency failed.\\n"
+                    printf "\\n\\tExiting now.\\n"
+                    exit 1
+                else
+                    printf "\\n\\tDPKG dependencies installed successfully.\\n"
+                fi
+            break;;
+            [Nn]* ) echo "User aborting installation of required dependencies, Exiting now."; exit;;
+            * ) echo "Please type 1 for yes or 2 for no.";;
+        esac
+    done
+else 
+    printf "\\n\\tNo required dpkg dependencies to install.\\n"
+fi
+
 
 printf "\\n\\tChecking for LLVM with WASM support.\\n"
 if [ ! -d "${WASM_ROOT}/bin" ]; then
