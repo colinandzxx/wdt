@@ -5,7 +5,7 @@ ROOT_PATH=${PWD}
 
 # get dependencies
 DEP_ARRAY=(clang-6.0 lldb-6.0 libclang-6.0-dev cmake make automake build-essential \
-autoconf libtool)
+autoconf libtool jq)
 COUNT=1
 DISPLAY=""
 DEP=""
