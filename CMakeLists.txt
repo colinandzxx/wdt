@@ -98,6 +98,7 @@ endif( WIN32 )
 
 add_subdirectory( externals )
 add_subdirectory( abi-gen )
+add_subdirectory( wdtool )
 
 include( wasm )
 
