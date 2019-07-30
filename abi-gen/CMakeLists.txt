@@ -3,8 +3,7 @@ if (NOT LLVM_FOUND)
   message(FATAL_ERROR "LLVM Not Found!")
 endif (NOT LLVM_FOUND)
 
-set(Boost_DIR, ${BOOST_ROOT})
-find_package(Boost 1.67 REQUIRED CONFIG)
+find_package(Boost 1.67)
 if (NOT Boost_FOUND)
   message(FATAL_ERROR "Boost Not Found!")
 endif (NOT Boost_FOUND)
@@ -12,19 +11,18 @@ endif (NOT Boost_FOUND)
 #project name
 # project(abi-gen)
 
-#head file path
-target_include_directories(
-  PUBLIC  "${CMAKE_CURRENT_SOURCE_DIR}/include"
-          # ~/opt/boost/include
-          "${LLVM_INCLUDE_DIRS}"
-          "${Boost_INCLUDE_DIRS}"
-)
-
 #source directory
 aux_source_directory(src DIR_SRCS)
 
 #add executable file
 add_executable(abi-gen ${DIR_SRCS})
+
+#head file path
+target_include_directories(abi-gen PUBLIC
+  "${CMAKE_CURRENT_SOURCE_DIR}/include"
+  "${LLVM_INCLUDE_DIRS}"
+  "${Boost_INCLUDE_DIRS}"
+)
 
 #add link library
 target_link_libraries(abi-gen
