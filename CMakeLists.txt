@@ -98,9 +98,9 @@ endif( WIN32 )
 
 add_subdirectory( externals )
 add_subdirectory( abi-gen )
-add_subdirectory( wdtool )
 
 include( wasm )
 
 add_subdirectory( lib )
 add_subdirectory( dev )
+add_subdirectory( wdtool )
