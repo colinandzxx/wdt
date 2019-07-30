@@ -97,6 +97,7 @@ endif( WIN32 )
 
 
 add_subdirectory( externals )
+add_subdirectory( abi_gen )
 
 include( wasm )
 
