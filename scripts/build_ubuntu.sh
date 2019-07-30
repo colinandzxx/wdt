@@ -3,6 +3,30 @@ JOBS=$(( CPU_CORE ))
 VER=release_40
 ROOT_PATH=${PWD}
 
+# get dependencies
+DEP_ARRAY=(clang-6.0 lldb-6.0 libclang-6.0-dev cmake make automake build-essential \
+autoconf libtool)
+COUNT=1
+DISPLAY=""
+DEP=""
+
+printf "\\n\\tChecking for installed dependencies.\\n\\n"
+
+for (( i=0; i<${#DEP_ARRAY[@]}; i++ ));
+do
+    pkg=$( dpkg -s "${DEP_ARRAY[$i]}" 2>/dev/null | grep Status | tr -s ' ' | cut -d\  -f4 )
+    if [ -z "$pkg" ]; then
+        DEP=$DEP" ${DEP_ARRAY[$i]} "
+        DISPLAY="${DISPLAY}${COUNT}. ${DEP_ARRAY[$i]}\\n\\t"
+        printf "\\tPackage %s ${bldred} NOT ${txtrst} found.\\n" "${DEP_ARRAY[$i]}"
+        (( COUNT++ ))
+    else
+        printf "\\tPackage %s found.\\n" "${DEP_ARRAY[$i]}"
+        continue
+    fi
+done
+
+
 printf "\\n\\tChecking for LLVM with WASM support.\\n"
 if [ ! -d "${WASM_ROOT}/bin" ]; then
 # Build LLVM and clang with WASM support:
