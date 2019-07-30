@@ -1,3 +1,13 @@
+CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [ "${CWD}" != "${PWD}" ]; then
+    printf "\\n\\tPlease cd into directory %s to run this script.\\n \\tExiting now.\\n\\n" "${CWD}"
+    exit 1
+fi
+if [ -f "${PWD}/CMakeCache.txt" ]; then
+    printf "\\n\\tPlease remove file %s/CMakeCache.txt before building EOSIO.\\n \\tExiting now.\\n\\n" "${PWD}"
+    exit 1
+fi
+
 VERSION=0.0.1
 
 ARCH=$( uname )
@@ -24,15 +34,14 @@ if [ "$ARCH" == "Linux" ]; then
             FILE="${PWD}/scripts/build_ubuntu.sh"
             CXX_COMPILER=clang++
             C_COMPILER=clang
-            MONGOD_CONF=${HOME}/opt/mongodb/mongod.conf
-            export PATH=${HOME}/opt/mongodb/bin:$PATH
         ;;
         *)
             printf "\\n\\tUnsupported Linux Distribution. Exiting now.\\n\\n"
             exit 1
     esac
 
-    WASM_ROOT="${HOME}/opt/wdt/wasm"
+    export BOOST_ROOT="${HOME}/opt/wdt/boost"
+    WASM_ROOT="${HOME}/opt/wdt/wasm"    
     
     . "$FILE"
 
